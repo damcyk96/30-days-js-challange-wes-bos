@@ -1,9 +1,14 @@
-const inputs = document.querySelectorAll(`.controls input`);
+const panels = document.querySelectorAll(".panel");
 
-function handleUpdate() {
-const suffix = this.dataset.sizing || ``;
-document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+function toggleOpen() {
+  this.classList.toggle(`open`);
 }
 
-inputs.forEach(input => input.addEventListener(`change`, handleUpdate));
-inputs.forEach(input => input.addEventListener(`mousemove`, handleUpdate));
+function toggleActive(e) {
+  if (e.propertyName === `flex`) {
+    this.classList.toggle(`open-active`);
+  }
+}
+
+panels.forEach(panel => panel.addEventListener(`click`, toggleOpen));
+panels.forEach(panel => panel.addEventListener("transitioend", toggleActive));
